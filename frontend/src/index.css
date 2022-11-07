@@ -12,7 +12,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.overlayUnder, .overlayAbove {
+.overlayUnder,
+.overlayAbove {
   position: fixed;
   left: 0;
   top: 0;
@@ -26,7 +27,7 @@ body {
 }
 
 .overlayAbove {
-  background:rgba(0, 0, 0, 0.6) url("./assets/pattern.png");
+  background: rgba(0, 0, 0, 0.6) url("./assets/pattern.png");
   background-repeat: repeat;
 }
 
@@ -62,7 +63,7 @@ select,
 textarea,
 button {
   padding: 1rem;
-  border-radius: 2rem;
+  border-radius: 1rem;
   border: 0.1rem #a4a4a4 solid;
   font-size: 1rem;
   font-family: Helvetica, Arial, sans-serif;
@@ -94,7 +95,10 @@ input[type="file"] {
   cursor: pointer;
 }
 
-textarea:focus, input:focus, textarea:hover, input:hover{
+textarea:focus,
+input:focus,
+textarea:hover,
+input:hover {
   outline: none;
 }
 
@@ -162,8 +166,8 @@ a {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .scroll-x {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .loader {
@@ -171,7 +175,7 @@ a {
 }
 
 .logo-container {
-  fill: #413CC1;
+  fill: #413cc1;
 }
 
 /* Form */
@@ -268,7 +272,8 @@ a {
   transition: color 0.25s 0.0833333333s;
   position: relative;
 }
-.draw-border::before, .draw-border::after {
+.draw-border::before,
+.draw-border::after {
   border: 0 solid transparent;
   border-radius: 5px;
   box-sizing: border-box;
@@ -292,11 +297,12 @@ a {
 }
 
 .draw-border:hover {
-  color: #C1413C;
+  color: #c1413c;
 }
 
-.draw-border:hover::before, .draw-border:hover::after {
-  border-color: #C1413C;
+.draw-border:hover::before,
+.draw-border:hover::after {
+  border-color: #c1413c;
   transition: border-color 0s, width 0.15s, height 0.15s;
   width: 100%;
   height: 100%;
@@ -355,142 +361,6 @@ a {
   color: #009933;
 }
 
-/* Table */
-.content-table {
-  border-collapse: collapse;
-  margin-bottom: 25px;
-  color: #000000;
-  font-size: 1rem;
-  min-width: 400px;
-  width: 100%;
-  border-radius: 5px 5px 0 0;
-  overflow: scroll;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
-
-.content-table thead tr {
-  background-color: #009933;
-  color: #ffffff;
-  text-align: left;
-  font-weight: bold;
-}
-
-.content-table th,
-.content-table td {
-  padding: 10px 15px;
-  vertical-align: middle;
-}
-
-.matches-td {
-  display: flex;
-  align-items: center;
-}
-
-.matches-td-right {
-  justify-content: flex-end !important;
-}
-
-.td-logo {
-  padding: 12px 0 !important;
-  text-align: right;
-}
-
-.content-table tbody tr {
-  border-bottom: 1px solid #dddddd;
-}
-
-.content-table tbody tr:nth-of-type(even) {
-  background-color: #f3f3f3;
-}
-
-.content-table tbody tr:nth-of-type(odd) {
-  background-color: #bdbdbd;
-}
-
-.content-table tbody tr:last-of-type {
-  border-bottom: 2px solid #009933;
-}
-
-.table {
-  display: flex;
-  flex-direction: column;
-}
-
-.table-buttons-container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 3rem;
-}
-
-.table-buttons-container button {
-  font-size: 1rem;
-  outline: none;
-}
-
-.table-buttons-container button:hover {
-  border: 0.15rem #009933 solid;
-}
-
-.button-selected {
-  border: 0.15rem #009933 solid;
-}
-
-.no-data {
-  text-align: center;
-}
-
-.team-logo {
-  max-width: 25px;
-  padding: 12px 15px;
-}
-
-/* Livechat */
-.livechat-container {
-  width: 80vw;
-  max-height: 80vh;
-}
-
-.ce-chat-title {
-  position: relative !important;
-}
-
-.ce-message-form-container {
-  position: relative !important;
-}
-
-#ce-send-message-button,
-.ce-my-message-bubble {
-  background-color: #009933 !important;
-}
-
-.ce-chat-feed,
-.ce-chat-feed-container {
-  height: 60vh !important;
-  max-height: 55vh !important;
-}
-
-.ce-feed-container-bottom {
-  height: 0 !important;
-}
-
-.ce-chat-title,
-.ce-feed-container-top {
-  display: none !important;
-}
-
-#ce-scroll-down-bar,
-#ce-connecting-popup {
-  bottom: 30vh !important;
-}
-
-#ce-send-message-button {
-  padding: 2px 6px !important;
-}
-
-.ql-editor p {
-  color: #000 !important;
-}
-
 /* ConfirmBox */
 .confirm-box-container {
   position: fixed;
@@ -503,7 +373,7 @@ a {
   border-radius: 0.2rem;
   border: 0.1rem #a02020 solid;
   font-size: 1rem;
-  color: #413CC1;
+  color: #413cc1;
   background-color: #f3f3f3;
 }
 
@@ -544,7 +414,7 @@ a {
   display: flex;
   color: #fff;
   flex-direction: row;
-  justify-content:space-evenly
+  justify-content: space-evenly;
 }
 
 .footer-links {
@@ -567,6 +437,3 @@ a {
   width: 31px;
   height: 31px;
 }
-
-
-

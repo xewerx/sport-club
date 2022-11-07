@@ -1,98 +1,144 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { History } from 'history';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import LoadingBox from "../components/LoadingBox/LoadingBox";
+import MessageBox from "../components/MessageBox/MessageBox";
+import AuthGuard from "../hooks/authGuard";
+import { registerAction } from "../state/actions/registerAction";
+import { AppState } from "../state/types";
 
-import LoadingBox from '../components/LoadingBox/LoadingBox';
-import MessageBox from '../components/MessageBox/MessageBox';
-import { register } from '../actions/userActions';
-import stateType from '../@types/globaStateType';
+const RegisterScreen: React.FC = (props) => {
+  const [role, setRole] = useState("");
+  const [email, setEmail] = useState("");
+  const [coach, setCoach] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [validationPasswordError, setValidationPasswordError] = useState("");
+  const [isText, setIsText] = useState(false);
 
-interface IProps {
-    history: History
-}
+  const { user, error, loading } = useSelector(
+    (state: AppState) => state.userState
+  );
+  AuthGuard(user);
 
-const RegisterScreen: React.FC<IProps> = (props) => {
+  const strongPassword = new RegExp(
+    "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})"
+  );
 
-    const [name, setName] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [confirmPassword, setConfirmPassword] = useState<string>('');
-    const [validationPasswordError, setValidationPasswordError] = useState<string>('');
-    const [isText, setIsText] = useState<boolean>(false);
-
-    const userRegister = useSelector((state: stateType) => state.userRegister);
-    const userSignin = useSelector((state: stateType) => state.userSignin);
-    const { loading, error } = userRegister;
-    const { userInfo } = userSignin;
-    
-    const strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
-
-    const showPassword = () => {
-        let password = document.getElementById("password") as HTMLInputElement;
-        let confirmPassword = document.getElementById("confirmPassword") as HTMLInputElement;
-        if(isText) {
-            password!.type = "text";
-            confirmPassword!.type = "text";
-        } else {
-            password!.type = "password";
-            confirmPassword!.type = "password"; 
-        }
-        setIsText(!isText);
-    };
-
-    const dispatch = useDispatch();
-    const submitHandler = (e: React.SyntheticEvent) => {
-        e.preventDefault();
-        if(password !== confirmPassword) {
-            setValidationPasswordError("Hasla nie sa takie same");
-        } else if(!strongPassword.test(password)) {
-            setValidationPasswordError("Haslo jest zbyt slabe");
-        }else {
-            setValidationPasswordError('');
-            dispatch(register({name, email, password}));
-        }
+  const showPassword = () => {
+    let password = document.getElementById("password") as HTMLInputElement;
+    let confirmPassword = document.getElementById(
+      "confirmPassword"
+    ) as HTMLInputElement;
+    if (isText) {
+      password!.type = "text";
+      confirmPassword!.type = "text";
+    } else {
+      password!.type = "password";
+      confirmPassword!.type = "password";
     }
+    setIsText(!isText);
+  };
 
-    useEffect(() => {
-        if(userInfo) {
-            props.history.push('/');
-        }
-    }, [props.history, userInfo]);
+  const dispatch = useDispatch();
+  const submitHandler = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      setValidationPasswordError("Hasla nie sa takie same");
+    } else if (!strongPassword.test(password)) {
+      setValidationPasswordError("Haslo jest zbyt slabe");
+    } else {
+      setValidationPasswordError("");
+      registerAction(email, password, role, coach, dispatch);
+    }
+  };
 
-    return (
-        <div className="screen-container">
-            <div className="caption">
-                <h2>Zarejestruj się</h2>
-            </div>
-            <form className="form" onSubmit={submitHandler}>
-                <div>
-                    <input className="element-hover" type="email" id="email" placeholder="Adres e-mail" required onChange={(e) => setEmail(e.target.value)}></input>
-                </div>
-                <div>
-                    <input className="element-hover" type="text" id="name" placeholder="Imię" required onChange={(e) => setName(e.target.value)}></input>
-                </div>
-                <div className="form-group">
-                    <input className="element-hover" type="password" id="password" placeholder="Hasło" required onChange={(e) => setPassword(e.target.value)}></input>
-                    <span className="fa fa-fw field-icon fa-eye" onClick={showPassword} ></span>
-                </div>
-                <div className="form-group">
-                    <input className="element-hover" type="password" id="confirmPassword" placeholder="Potwierdz hasło" required onChange={(e) => setConfirmPassword(e.target.value)}></input>
-                </div>
-                {validationPasswordError ? (<MessageBox variant="danger">{validationPasswordError}</MessageBox>)
-                :
-                error ? (<MessageBox variant="danger">{error}</MessageBox>) : <></>
-                }
-                {loading && <LoadingBox></LoadingBox>}
-                <div>
-                    <button className="primary element-hover" type="submit">Zarejestruj się</button>
-                </div>
-                    <label>
-                        Posiadasz juz konto? <Link to={`/signin`}>Zaloguj się!</Link>
-                    </label>
-            </form>
+  return (
+    <div className="screen-container">
+      <div className="caption">
+        <h2>Zarejestruj się</h2>
+      </div>
+      <form className="form" onSubmit={submitHandler}>
+        <div>
+          <input
+            className="element-hover"
+            type="email"
+            id="email"
+            placeholder="Adres e-mail"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
         </div>
-    )
-}
+        <div className="form-group">
+          <input
+            className="element-hover"
+            type="password"
+            id="password"
+            placeholder="Hasło"
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
+          <span
+            className="fa fa-fw field-icon fa-eye"
+            onClick={showPassword}
+          ></span>
+        </div>
+        <div className="form-group">
+          <input
+            className="element-hover"
+            type="password"
+            id="confirmPassword"
+            placeholder="Potwierdź hasło"
+            required
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <select
+            className="element-hover"
+            id="role"
+            placeholder="Rola"
+            required
+            onChange={(e) => setRole(e.target.value)}
+          >
+            <option>Trener</option>
+            <option>Sportowiec</option>
+          </select>
+        </div>
+        {role === "Sportowiec" && (
+          <div>
+            <select
+              className="element-hover"
+              id="trainer"
+              placeholder="Trener"
+              required
+              onChange={(e) => setCoach(e.target.value)}
+            >
+              <option>Trener1</option>
+              <option>Sportowiec2</option>
+            </select>
+          </div>
+        )}
+
+        {validationPasswordError ? (
+          <MessageBox variant="danger">{validationPasswordError}</MessageBox>
+        ) : error ? (
+          <MessageBox variant="danger">{error}</MessageBox>
+        ) : (
+          <></>
+        )}
+        {loading && <LoadingBox></LoadingBox>}
+        <div>
+          <button className="primary element-hover" type="submit">
+            Zarejestruj się
+          </button>
+        </div>
+        <label>
+          Posiadasz juz konto? <Link to={`/signin`}>Zaloguj się!</Link>
+        </label>
+      </form>
+    </div>
+  );
+};
 
 export default RegisterScreen;

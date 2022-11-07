@@ -1,29 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { History } from "history";
-
 import LoadingBox from "../components/LoadingBox/LoadingBox";
 import MessageBox from "../components/MessageBox/MessageBox";
-import { signin } from "../actions/userActions";
-import stateType from "../@types/globaStateType";
+import AuthGuard from "../hooks/authGuard";
+import { loginAction } from "../state/actions/loginAction";
+import { AppState } from "../state/types";
 
-interface IProps {
-  history: History;
-}
-
-const SigninScreen: React.FC<IProps> = (props) => {
+const SigninScreen: React.FC = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isText, setIsText] = useState(false);
-
-  const user = useSelector((state: stateType) => state.userSignin);
-  const { loading, userInfo, error } = user;
-
   const dispatch = useDispatch();
+
+  const { user, error, loading } = useSelector(
+    (state: AppState) => state.userState
+  );
+  AuthGuard(user);
+
   const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    dispatch(signin({ email, password }));
+    loginAction(email, password, dispatch);
   };
 
   const showPassword = () => {
@@ -31,12 +28,6 @@ const SigninScreen: React.FC<IProps> = (props) => {
     isText ? (password!.type = "password") : (password!.type = "text");
     setIsText(!isText);
   };
-
-  useEffect(() => {
-    if (userInfo) {
-      props.history.push("/");
-    }
-  }, [props.history, userInfo]);
 
   return (
     <div className="screen-container">

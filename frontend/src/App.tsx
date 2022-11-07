@@ -1,14 +1,17 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Navbar/Header";
 import HomeScreen from "./screens/HomeScreen";
 import SigninScreen from "./screens/SigninScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import MyProfileScreen from "./screens/MyProfileScreen";
 import Footer from "./components/Footer/Footer";
+import { useSelector } from "react-redux";
+import { AppState } from "./state/types";
 
 const App: React.FC = () => {
+  const { user } = useSelector((state: AppState) => state.userState);
+
   return (
     <>
       <BrowserRouter>
@@ -16,10 +19,14 @@ const App: React.FC = () => {
         <div className="overlayAbove"></div>
         <Header />
         <main className="row">
-          <Route path="/" component={HomeScreen} exact></Route>
-          <Route path="/signin" component={SigninScreen}></Route>
-          <Route path="/register" component={RegisterScreen}></Route>
-          <Route path="/myprofile" component={MyProfileScreen}></Route>
+          <Routes>
+            <Route
+              path="*"
+              element={user ? <HomeScreen /> : <SigninScreen />}
+            />
+            <Route path="/register" element={<RegisterScreen />} />
+            <Route path="/myprofile" element={<MyProfileScreen />} />
+          </Routes>
         </main>
         <Footer />
       </BrowserRouter>

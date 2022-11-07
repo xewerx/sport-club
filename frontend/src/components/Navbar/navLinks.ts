@@ -1,3 +1,3 @@
-const navLinks = [{ title: `Memy`, path: `/` }];
+const navLinks = [{ title: `DUpa`, path: `/` }];
 
 export default navLinks;

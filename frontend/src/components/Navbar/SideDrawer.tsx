@@ -12,15 +12,14 @@ import { Menu } from "@material-ui/icons";
 import { ClassNameMap } from "@material-ui/core/styles/withStyles";
 import useStyles from "./styles";
 import navLinks from "./navLinks";
-import stateType from "../../@types/globaStateType";
-import { signout } from "../../actions/userActions";
+import { logoutAction } from "../../state/actions/logoutAction";
+import { AppState } from "../../state/types";
 
 const SideDrawer: React.FC = () => {
   const classes: ClassNameMap = useStyles();
   const [stateMobileNav, setStateMobileNav] = useState(false);
 
-  const user = useSelector((state: stateType) => state.userSignin);
-  const { userInfo } = user;
+  const { user } = useSelector((state: AppState) => state.userState);
 
   const toggleDrawer = (stateMobileNav: boolean) => () => {
     setStateMobileNav(stateMobileNav);
@@ -28,7 +27,7 @@ const SideDrawer: React.FC = () => {
 
   const dispatch = useDispatch();
   const signoutHandler = () => {
-    dispatch(signout());
+    logoutAction(dispatch);
   };
 
   const sideDrawerList = () => (
@@ -46,27 +45,13 @@ const SideDrawer: React.FC = () => {
             </ListItem>
           </Link>
         ))}
-        {userInfo ? (
+        {user ? (
           <>
-            {!userInfo.isGoogleAuthUser && (
-              <Link to={"/myprofile"} className={classes.linkTextGreen}>
-                <ListItem button>
-                  <ListItemText primary="Profil" />
-                </ListItem>
-              </Link>
-            )}
-            <Link to={"/addmem"} className={classes.linkTextGreen}>
+            <Link to={"/myprofile"} className={classes.linkTextGreen}>
               <ListItem button>
-                <ListItemText primary="Dodaj mema" />
+                <ListItemText primary="Profil" />
               </ListItem>
             </Link>
-            {userInfo.isAdmin && (
-              <Link to="/acceptmem" className={classes.linkTextGreen}>
-                <ListItem button>
-                  <ListItemText primary="Akceptacje" />
-                </ListItem>
-              </Link>
-            )}
             <Link
               to={"#signout"}
               onClick={signoutHandler}
