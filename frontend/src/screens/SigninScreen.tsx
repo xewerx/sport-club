@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "../components/LoadingBox/LoadingBox";
 import MessageBox from "../components/MessageBox/MessageBox";
 import AuthGuard from "../hooks/authGuard";
-import { loginAction } from "../state/actions/loginAction";
 import { AppState } from "../state/types";
+import { loginAction } from "../state/actions/user/loginAction";
 
 const SigninScreen: React.FC = (props) => {
   const [email, setEmail] = useState("");
@@ -25,7 +25,7 @@ const SigninScreen: React.FC = (props) => {
 
   const showPassword = () => {
     let password = document.getElementById("password") as HTMLInputElement;
-    isText ? (password!.type = "password") : (password!.type = "text");
+    isText ? (password.type = "password") : (password.type = "text");
     setIsText(!isText);
   };
 

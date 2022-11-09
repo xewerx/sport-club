@@ -16,8 +16,8 @@ import SideDrawer from "./SideDrawer";
 import { ClassNameMap } from "@material-ui/core/styles/withStyles";
 import useStyles from "./styles";
 import navLinks from "./navLinks";
-import { logoutAction } from "../../state/actions/logoutAction";
 import { AppState } from "../../state/types";
+import { logoutAction } from "../../state/actions/user/logoutAction";
 
 const Header: React.FC = () => {
   const classes: ClassNameMap = useStyles();

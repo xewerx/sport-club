@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ActionType } from "./types";
 
 export type User = {
   id: string;
@@ -24,8 +25,10 @@ const userSlice = createSlice({
   name: "userState",
   initialState,
   reducers: {
-    signIn: (state, action) => {
+    signIn: (state, action: ActionType<UserState>) => {
       state.user = action.payload.user;
+      state.loading = false;
+      state.error = action.payload.error;
     },
     signOut: (state) => {
       state.user = null;

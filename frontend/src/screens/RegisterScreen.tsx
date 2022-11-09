@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LoadingBox from "../components/LoadingBox/LoadingBox";
 import MessageBox from "../components/MessageBox/MessageBox";
 import AuthGuard from "../hooks/authGuard";
-import { registerAction } from "../state/actions/registerAction";
+import { getCoachesAction } from "../state/actions/data/getCoaches";
+import { registerAction } from "../state/actions/user/registerAction";
 import { AppState } from "../state/types";
 
 const RegisterScreen: React.FC = (props) => {
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("Trener");
   const [email, setEmail] = useState("");
-  const [coach, setCoach] = useState("");
+  const [coach, setCoach] = useState<undefined | string>();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [validationPasswordError, setValidationPasswordError] = useState("");
@@ -20,6 +21,8 @@ const RegisterScreen: React.FC = (props) => {
     (state: AppState) => state.userState
   );
   AuthGuard(user);
+
+  const coaches = useSelector((state: AppState) => state.dataState.coaches);
 
   const strongPassword = new RegExp(
     "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})"
@@ -31,11 +34,11 @@ const RegisterScreen: React.FC = (props) => {
       "confirmPassword"
     ) as HTMLInputElement;
     if (isText) {
-      password!.type = "text";
-      confirmPassword!.type = "text";
+      password.type = "text";
+      confirmPassword.type = "text";
     } else {
-      password!.type = "password";
-      confirmPassword!.type = "password";
+      password.type = "password";
+      confirmPassword.type = "password";
     }
     setIsText(!isText);
   };
@@ -53,6 +56,10 @@ const RegisterScreen: React.FC = (props) => {
     }
   };
 
+  useEffect(() => {
+    getCoachesAction(dispatch);
+  }, [dispatch]);
+  console.log(error);
   return (
     <div className="screen-container">
       <div className="caption">
@@ -114,8 +121,10 @@ const RegisterScreen: React.FC = (props) => {
               required
               onChange={(e) => setCoach(e.target.value)}
             >
-              <option>Trener1</option>
-              <option>Sportowiec2</option>
+              {coaches &&
+                coaches?.map(({ username, id }) => (
+                  <option key={id}>{username}</option>
+                ))}
             </select>
           </div>
         )}

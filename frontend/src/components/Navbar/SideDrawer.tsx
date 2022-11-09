@@ -12,8 +12,8 @@ import { Menu } from "@material-ui/icons";
 import { ClassNameMap } from "@material-ui/core/styles/withStyles";
 import useStyles from "./styles";
 import navLinks from "./navLinks";
-import { logoutAction } from "../../state/actions/logoutAction";
 import { AppState } from "../../state/types";
+import { logoutAction } from "../../state/actions/user/logoutAction";
 
 const SideDrawer: React.FC = () => {
   const classes: ClassNameMap = useStyles();
