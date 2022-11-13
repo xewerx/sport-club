@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
@@ -21,8 +22,8 @@ export class AuthService {
     password: string,
   ): Promise<UserWithoutPassword | null> {
     const user = await this.usersService.findOne(username);
+
     if (user && bcrypt.compare(password, user.password)) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...result } = user;
       return result;
     }
@@ -30,17 +31,35 @@ export class AuthService {
     return null;
   }
 
-  async login({ username, id, role }: User): Promise<LoginResponse> {
+  async login({
+    username,
+    id,
+    role,
+    coach,
+    club,
+    avatar,
+  }: User): Promise<LoginResponse> {
     const payload = { username, id, role };
 
     return {
       accessToken: this.jwtService.sign(payload),
+      id,
       username,
       role,
+      coach,
+      avatar,
+      clubName: club?.name ?? null,
     };
   }
 
-  async register(userData: RegisterInput): Promise<User> {
-    return this.usersService.create(userData);
+  async register(userData: RegisterInput): Promise<LoginResponse> {
+    const user = await this.usersService.create(userData);
+    const { password, club, ...result } = user;
+
+    return {
+      ...result,
+      accessToken: this.jwtService.sign(result),
+      clubName: null,
+    };
   }
 }
