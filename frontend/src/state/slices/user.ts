@@ -2,11 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ActionType } from "./types";
 
 export type User = {
-  id: string;
+  id: number;
   username: string;
-  role: "coach" | "athlete";
+  role: "Trener" | "Sportowiec";
   accessToken: string;
-  avatar: string;
+  clubName: string;
+  coach: string;
+  avatar?: string;
 };
 
 export type UserState = {
@@ -35,9 +37,13 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
+    setAvatar: (state, action: ActionType<UserState>) => {
+      state.user = action.payload.user;
+      state.error = action.payload.error;
+    },
   },
 });
 
-export const { signIn, signOut } = userSlice.actions;
+export const { signIn, signOut, setAvatar } = userSlice.actions;
 
 export default userSlice.reducer;

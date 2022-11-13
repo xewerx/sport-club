@@ -8,7 +8,7 @@ import { getCoachesAction } from "../state/actions/data/getCoaches";
 import { registerAction } from "../state/actions/user/registerAction";
 import { AppState } from "../state/types";
 
-const RegisterScreen: React.FC = (props) => {
+const RegisterScreen: React.FC = () => {
   const [role, setRole] = useState("Trener");
   const [email, setEmail] = useState("");
   const [coach, setCoach] = useState<undefined | string>();
@@ -48,9 +48,11 @@ const RegisterScreen: React.FC = (props) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setValidationPasswordError("Hasla nie sa takie same");
-    } else if (!strongPassword.test(password)) {
-      setValidationPasswordError("Haslo jest zbyt slabe");
-    } else {
+    }
+    // else if (!strongPassword.test(password)) {
+    //   setValidationPasswordError("Haslo jest zbyt slabe");
+    // }
+    else {
       setValidationPasswordError("");
       registerAction(email, password, role, coach, dispatch);
     }
@@ -59,7 +61,12 @@ const RegisterScreen: React.FC = (props) => {
   useEffect(() => {
     getCoachesAction(dispatch);
   }, [dispatch]);
-  console.log(error);
+
+  useEffect(() => {
+    setCoach(coaches[0]?.username ?? "");
+  }, [coaches, dispatch]);
+
+  console.log(coach);
   return (
     <div className="screen-container">
       <div className="caption">
@@ -121,7 +128,7 @@ const RegisterScreen: React.FC = (props) => {
               required
               onChange={(e) => setCoach(e.target.value)}
             >
-              {coaches &&
+              {coaches.length > 0 &&
                 coaches?.map(({ username, id }) => (
                   <option key={id}>{username}</option>
                 ))}

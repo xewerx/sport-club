@@ -17,9 +17,10 @@ export const registerAction = async (
         username: email,
         password,
         role,
-        ...(coach ? { coach } : {}),
+        ...(role === "Sportowiec" ? { coach } : {}),
       }
     );
+    console.log(user);
     dispatch(
       signIn({
         user,

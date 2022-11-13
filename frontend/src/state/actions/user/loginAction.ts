@@ -29,7 +29,7 @@ export const loginAction = async (
       signIn({
         user: null,
         loading: false,
-        error: error as string,
+        error: "Błąd logowania",
       })
     );
   }

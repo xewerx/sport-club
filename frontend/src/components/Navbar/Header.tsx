@@ -64,11 +64,6 @@ const Header: React.FC = () => {
                   />
                   <div>
                     <ul className="dropdown-content">
-                      <li>
-                        <Link to="/myprofile" className="fullWidth">
-                          Profil
-                        </Link>
-                      </li>
                       <li className="last-li">
                         <Link
                           to="#signout"
