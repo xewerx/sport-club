@@ -1,7 +1,8 @@
 import { UserEntity } from './users.entity';
 
 export type UserInput = Omit<UserEntity, 'id'>;
-export type Coach = Omit<UserEntity, 'password'>;
+export type Coach = Omit<UserEntity, 'password' | 'avatar'>;
+export type Athlete = Omit<UserEntity, 'password' | 'avatar'>;
 
 export type CoachesReq = Express.Request;
 
@@ -18,3 +19,7 @@ export interface SetAvatarReq extends Express.Request {
     avatar: string;
   };
 }
+
+export type GetAthletesQuery = {
+  coach: string;
+};

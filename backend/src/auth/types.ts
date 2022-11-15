@@ -6,7 +6,7 @@ export type LoginResponse = {
   id: number;
   role: string;
   clubName: string;
-  coach: number;
+  coach: string;
   avatar: string;
 };
 

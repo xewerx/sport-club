@@ -3,6 +3,8 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ClubsModule } from './clubs/clubs.module';
+import { CompetitionModule } from './competition/competition.module';
+import { ResultsModule } from './results/results.module';
 
 @Module({
   imports: [
@@ -13,8 +15,10 @@ import { ClubsModule } from './clubs/clubs.module';
       type: 'sqlite',
       database: 'sportDB.db',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      // synchronize: true,
+      synchronize: true,
     }),
+    CompetitionModule,
+    ResultsModule,
   ],
   controllers: [],
   providers: [],

@@ -1,6 +1,12 @@
-import { Controller, Get, Patch, Post, Request } from '@nestjs/common';
+import { Controller, Get, Patch, Post, Query, Request } from '@nestjs/common';
 import { exceptionHandler } from 'src/utils/exceptionHandler';
-import { Coach, SetAvatarReq, SetClubReq } from './types';
+import {
+  Athlete,
+  Coach,
+  GetAthletesQuery,
+  SetAvatarReq,
+  SetClubReq,
+} from './types';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -14,6 +20,19 @@ export class UsersController {
       return coaches.map((coach) => ({
         ...coach,
         password: undefined,
+        avatar: undefined,
+      }));
+    });
+  }
+
+  @Get('athletes')
+  async getAthletes(@Query() query: GetAthletesQuery): Promise<Athlete[]> {
+    return exceptionHandler(async () => {
+      const coaches = await this.userService.getAthletes(query.coach);
+      return coaches.map((athlete) => ({
+        ...athlete,
+        password: undefined,
+        avatar: undefined,
       }));
     });
   }

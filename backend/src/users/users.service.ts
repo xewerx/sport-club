@@ -41,6 +41,10 @@ export class UsersService {
     return this.userRepository.findBy({ role: 'Trener' });
   }
 
+  async getAthletes(coach: string): Promise<UserEntity[]> {
+    return this.userRepository.findBy({ coach });
+  }
+
   async setClub(userId: number, clubId: number) {
     return this.userRepository.update({ id: userId }, { club: { id: clubId } });
   }

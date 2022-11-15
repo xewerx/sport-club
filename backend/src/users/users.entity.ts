@@ -1,5 +1,12 @@
 import { ClubEntity } from 'src/clubs/clubs.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { CompetitionEntity } from 'src/competition/competition.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 
 @Entity()
 export class UserEntity {
@@ -20,9 +27,13 @@ export class UserEntity {
 
   // only for atheletes
   @Column({ nullable: true })
-  coach: number;
+  coach: string;
 
   // only for atheletes
   @ManyToOne(() => ClubEntity, (club) => club.members)
   club: ClubEntity;
+
+  // only for coaches
+  @OneToMany(() => CompetitionEntity, (competition) => competition.creator)
+  competitions: CompetitionEntity[];
 }
