@@ -8,6 +8,7 @@ import { SetCompetitionReq } from './types';
 export class CompetitionController {
   constructor(private readonly competitionService: CompetitionService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post('/')
   async addCompetition(@Request() req: SetCompetitionReq) {
     return exceptionHandler(async () => {

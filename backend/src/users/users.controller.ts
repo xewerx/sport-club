@@ -1,4 +1,13 @@
-import { Controller, Get, Patch, Post, Query, Request } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Patch,
+  Post,
+  Query,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { exceptionHandler } from 'src/utils/exceptionHandler';
 import {
   Athlete,
@@ -25,6 +34,7 @@ export class UsersController {
     });
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('athletes')
   async getAthletes(@Query() query: GetAthletesQuery): Promise<Athlete[]> {
     return exceptionHandler(async () => {
@@ -37,6 +47,7 @@ export class UsersController {
     });
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch('club')
   async setClub(@Request() req: SetClubReq) {
     return exceptionHandler(async () => {
@@ -45,6 +56,7 @@ export class UsersController {
     });
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('avatar')
   async setAvatar(@Request() req: SetAvatarReq) {
     return exceptionHandler(async () => {

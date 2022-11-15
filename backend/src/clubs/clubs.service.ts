@@ -12,6 +12,7 @@ export class ClubsService {
 
   async getClubs(owner: string): Promise<ClubEntity[]> {
     return await this.clubRepository.find();
+    // TODO
     // return this.clubRepository.find({ where: { owner: { username: owner } } });
   }
 }
