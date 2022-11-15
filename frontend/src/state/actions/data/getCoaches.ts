@@ -13,6 +13,7 @@ export const getCoachesAction = async (dispatch: Dispatch<any>) => {
       getCoaches({
         coaches,
         clubs: [],
+        athletes: [],
         error: null,
       })
     );
@@ -20,6 +21,7 @@ export const getCoachesAction = async (dispatch: Dispatch<any>) => {
     dispatch(
       getCoaches({
         coaches: [],
+        athletes: [],
         clubs: [],
         error: "Błąd pobierania trenerów",
       })

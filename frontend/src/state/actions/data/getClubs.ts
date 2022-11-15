@@ -16,6 +16,7 @@ export const getClubsAction = async (
       getClubs({
         coaches: [],
         clubs,
+        athletes: [],
         error: null,
       })
     );
@@ -24,6 +25,7 @@ export const getClubsAction = async (
       getClubs({
         coaches: [],
         clubs: [],
+        athletes: [],
         error: "Błąd pobierania trenerów",
       })
     );

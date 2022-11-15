@@ -2,7 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Routes, Route } from "react-router";
 import ClubPage from "../pages/ClubPage";
-import MyProfileScreen from "../pages/MyProfilePage";
+import CompetitionPage from "../pages/CompetitionPage";
+import MyProfilePage from "../pages/MyProfilePage";
 import { AppState } from "../state/types";
 
 const HomeScreen: React.FC = () => {
@@ -10,7 +11,8 @@ const HomeScreen: React.FC = () => {
   return (
     <div className="screen-container">
       <Routes>
-        <Route path="/profile" element={<MyProfileScreen />} />
+        <Route path="/profile" element={<MyProfilePage />} />
+        <Route path="/competition" element={<CompetitionPage />} />
         <Route
           path="/club"
           element={user?.role === "Trener" ? <></> : <ClubPage />}

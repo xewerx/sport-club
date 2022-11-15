@@ -4,7 +4,7 @@ import MessageBox from "../components/MessageBox/MessageBox";
 import { setAvatarAction } from "../state/actions/user/setAvatarAction";
 import { AppState } from "../state/types";
 
-const MyProfileScreen: React.FC = (props) => {
+const MyProfilePage: React.FC = (props) => {
   const { user } = useSelector((state: AppState) => state.userState);
 
   const dispatch = useDispatch();
@@ -93,4 +93,4 @@ const MyProfileScreen: React.FC = (props) => {
   );
 };
 
-export default MyProfileScreen;
+export default MyProfilePage;
