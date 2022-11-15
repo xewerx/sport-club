@@ -5,7 +5,9 @@ import { setAvatarAction } from "../state/actions/user/setAvatarAction";
 import { AppState } from "../state/types";
 
 const MyProfilePage: React.FC = (props) => {
-  const { user } = useSelector((state: AppState) => state.userState);
+  const { id, accessToken } = useSelector(
+    (state: AppState) => state.userState.user!
+  );
 
   const dispatch = useDispatch();
 
@@ -52,7 +54,7 @@ const MyProfilePage: React.FC = (props) => {
       setErrorAvatar("Zbyt duzy plik");
     }
 
-    setAvatarAction(dispatch, base64, user?.id!);
+    setAvatarAction(dispatch, base64, id, accessToken);
     console.log(base64);
   };
 

@@ -6,7 +6,12 @@ import { AppState } from "../state/types";
 
 function ClubPage() {
   const [club, setClub] = useState("");
-  const user = useSelector((state: AppState) => state.userState.user);
+  const {
+    coach,
+    id: userId,
+    accessToken,
+    clubName,
+  } = useSelector((state: AppState) => state.userState.user!);
   const clubs = useSelector((state: AppState) => state.dataState.clubs);
   const clubsWithNull = [...clubs, { id: null, name: "Brak" }];
   const dispatch = useDispatch();
@@ -14,20 +19,20 @@ function ClubPage() {
   const setNewClub = (clubName: string) => {
     const { id } = clubs.find((club) => club.name === clubName) ?? { id: null };
     setClub(clubName);
-    setClubAction(id, user!.id);
+    setClubAction(id, userId, accessToken);
   };
 
   useEffect(() => {
-    getClubsAction(dispatch, user?.coach!);
-  }, [dispatch, user?.coach]);
+    getClubsAction(dispatch, coach, accessToken);
+  }, [dispatch, coach, accessToken]);
 
   useEffect(() => {
-    setClub(user?.clubName ?? "");
-  }, [user?.clubName]);
+    setClub(clubName ?? "");
+  }, [clubName]);
 
   return (
     <>
-      <div>Mój trener: {user?.coach}</div>
+      <div>Mój trener: {coach}</div>
       <div>Mój obecny klub: {club || "Brak"}</div>
       <div>Zmień klub:</div>
       <div>

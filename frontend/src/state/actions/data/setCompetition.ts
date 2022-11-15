@@ -14,12 +14,20 @@ export interface Competition {
   results: Result[];
 }
 
-export const setCompetitionAction = async (competition: Competition) => {
+export const setCompetitionAction = async (
+  competition: Competition,
+  token: string
+) => {
   try {
     await axios.post(
       `${checkForEnv(process.env.REACT_APP_API_URL)}/competition`,
       {
         competition,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
     );
   } catch (error) {

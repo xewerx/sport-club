@@ -17,6 +17,7 @@ export const loginAction = async (
       }
     );
     console.log(user);
+    localStorage.setItem("user", JSON.stringify(user));
     dispatch(
       signIn({
         user,

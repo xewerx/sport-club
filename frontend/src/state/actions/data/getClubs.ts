@@ -5,11 +5,17 @@ import { getClubs } from "../../slices/data";
 
 export const getClubsAction = async (
   dispatch: Dispatch<any>,
-  owner: string
+  owner: string,
+  token: string
 ) => {
   try {
     const { data: clubs } = await axios.get(
-      `${checkForEnv(process.env.REACT_APP_API_URL)}/clubs/${owner}`
+      `${checkForEnv(process.env.REACT_APP_API_URL)}/clubs/${owner}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     console.log(clubs);
     dispatch(

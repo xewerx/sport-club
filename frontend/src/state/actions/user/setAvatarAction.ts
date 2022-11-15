@@ -5,7 +5,8 @@ import { checkForEnv } from "../../../utils/checkForEnv";
 export const setAvatarAction = async (
   dispatch: Dispatch<any>,
   avatar: string,
-  userId: number
+  userId: number,
+  token: string
 ) => {
   try {
     await axios.post(
@@ -13,6 +14,11 @@ export const setAvatarAction = async (
       {
         userId,
         avatar,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
     );
   } catch (error) {

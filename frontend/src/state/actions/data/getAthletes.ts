@@ -5,13 +5,19 @@ import { getAthletes } from "../../slices/data";
 
 export const getAthletesAction = async (
   dispatch: Dispatch<any>,
-  coach: string
+  coach: string,
+  token: string
 ) => {
   try {
     const { data: athletes } = await axios.get(
       `${checkForEnv(
         process.env.REACT_APP_API_URL
-      )}/users/athletes?coach=${coach}`
+      )}/users/athletes?coach=${coach}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     console.log(athletes);
     dispatch(

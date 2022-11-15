@@ -10,8 +10,8 @@ import { AppState } from "../state/types";
 
 function CompetitionPage() {
   const athletes = useSelector((state: AppState) => state.dataState.athletes);
-  const coach = useSelector(
-    (state: AppState) => state.userState.user?.username
+  const { accessToken, username } = useSelector(
+    (state: AppState) => state.userState.user!
   );
 
   const [description, setDescription] = useState("");
@@ -22,7 +22,7 @@ function CompetitionPage() {
 
   const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    setCompetitionAction({ description, date, time, results });
+    setCompetitionAction({ description, date, time, results }, accessToken);
   };
 
   // TODO: Remove duplicated code
@@ -63,8 +63,8 @@ function CompetitionPage() {
   console.log(results);
 
   useEffect(() => {
-    getAthletesAction(dispatch, coach!);
-  }, [coach, dispatch]);
+    getAthletesAction(dispatch, username!, accessToken);
+  }, [username, dispatch, accessToken]);
 
   return (
     <div className="screen-container">
