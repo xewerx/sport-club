@@ -15,7 +15,7 @@ import Avatar from "@material-ui/core/Avatar";
 import SideDrawer from "./SideDrawer";
 import { ClassNameMap } from "@material-ui/core/styles/withStyles";
 import useStyles from "./styles";
-import navLinks from "./navLinks";
+import { athleteNavLinks, coachNavLinks } from "./navLinks";
 import { AppState } from "../../state/types";
 import { logoutAction } from "../../state/actions/user/logoutAction";
 
@@ -27,6 +27,8 @@ const Header: React.FC = () => {
   const signoutHandler = () => {
     logoutAction(dispatch);
   };
+
+  const navLinks = user?.role === "Trener" ? coachNavLinks : athleteNavLinks;
 
   return (
     <AppBar className={classes.bar} position="fixed">

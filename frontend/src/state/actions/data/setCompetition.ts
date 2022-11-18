@@ -1,13 +1,8 @@
 import axios from "axios";
 import { checkForEnv } from "../../../utils/checkForEnv";
+import { Result } from "../../slices/data";
 
-export interface Result {
-  id: number;
-  score: string;
-  rating: number;
-}
-
-export interface Competition {
+interface Competition {
   description: string;
   date: string;
   time: string;

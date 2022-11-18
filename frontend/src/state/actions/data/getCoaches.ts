@@ -9,20 +9,11 @@ export const getCoachesAction = async (dispatch: Dispatch<any>) => {
       `${checkForEnv(process.env.REACT_APP_API_URL)}/users/coaches`
     );
     console.log(coaches);
-    dispatch(
-      getCoaches({
-        coaches,
-        clubs: [],
-        athletes: [],
-        error: null,
-      })
-    );
+    dispatch(getCoaches({ data: coaches }));
   } catch (error) {
     dispatch(
       getCoaches({
-        coaches: [],
-        athletes: [],
-        clubs: [],
+        data: [],
         error: "Błąd pobierania trenerów",
       })
     );

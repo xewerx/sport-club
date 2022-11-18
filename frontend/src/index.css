@@ -104,6 +104,7 @@ input:hover {
 
 .element-hover:hover {
   cursor: pointer;
+  color: #fff;
 }
 
 .no-hover:hover {
@@ -450,4 +451,54 @@ a {
   gap: 1rem;
   justify-content: center;
   align-items: center;
+}
+
+.result-row {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: row;
+  background-color: #009933;
+  min-width: 70%;
+  max-width: 70%;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+}
+
+.result-row p {
+  margin-right: 3rem;
+}
+
+.result-row p:first-child {
+  min-width: 6rem;
+  max-width: 6rem;
+  margin-left: 20%;
+}
+
+.competition-container {
+  margin-top: 2rem;
+  border-radius: 1rem;
+}
+
+.competition-header {
+  display: flex;
+  background-color: #009933;
+  flex-direction: row;
+  gap: 4rem;
+  padding: 0.3rem 1rem;
+  border-bottom: 0.2rem solid #000;
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
+}
+
+.competition-row {
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+  padding: 0.3rem 1rem;
+  background-color: rgba(39, 39, 39, 0.5);
+}
+
+.competition-row:last-child {
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
 }

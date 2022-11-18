@@ -18,20 +18,11 @@ export const getClubsAction = async (
       }
     );
     console.log(clubs);
-    dispatch(
-      getClubs({
-        coaches: [],
-        clubs,
-        athletes: [],
-        error: null,
-      })
-    );
+    dispatch(getClubs({ data: clubs }));
   } catch (error) {
     dispatch(
       getClubs({
-        coaches: [],
-        clubs: [],
-        athletes: [],
+        data: [],
         error: "Błąd pobierania trenerów",
       })
     );

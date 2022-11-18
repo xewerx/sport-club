@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AthleteRow from "../components/AthleteRow/AthleteRow";
 import { getAthletesAction } from "../state/actions/data/getAthletes";
-import {
-  Result,
-  setCompetitionAction,
-} from "../state/actions/data/setCompetition";
+import { setCompetitionAction } from "../state/actions/data/setCompetition";
+import { Result } from "../state/slices/data";
 import { AppState } from "../state/types";
 
-function CompetitionPage() {
+function AddCompetitionPage() {
   const athletes = useSelector((state: AppState) => state.dataState.athletes);
   const { accessToken, username } = useSelector(
     (state: AppState) => state.userState.user!
@@ -26,37 +24,41 @@ function CompetitionPage() {
   };
 
   // TODO: Remove duplicated code
-  const setScore = (id: number, score: string) => {
+  const setScore = (athleteId: number, score: string) => {
     setResults((currentResults) => {
-      const existedResult = currentResults.find((result) => result.id === id);
+      const existedResult = currentResults.find(
+        (result) => result.athleteId === athleteId
+      );
 
       if (existedResult) {
         const resultsWithoutNew = currentResults.filter(
-          (result) => result.id !== id
+          (result) => result.athleteId !== athleteId
         );
         return [
           ...resultsWithoutNew,
-          { id, score, rating: existedResult.rating },
+          { athleteId, score, rating: existedResult.rating },
         ];
       }
-      return [...currentResults, { id, rating: 0, score }];
+      return [...currentResults, { athleteId, rating: 0, score }];
     });
   };
 
-  const setRating = (id: number, rating: number) => {
+  const setRating = (athleteId: number, rating: number) => {
     setResults((currentResults) => {
-      const existedResult = currentResults.find((result) => result.id === id);
+      const existedResult = currentResults.find(
+        (result) => result.athleteId === athleteId
+      );
 
       if (existedResult) {
         const resultsWithoutNew = currentResults.filter(
-          (result) => result.id !== id
+          (result) => result.athleteId !== athleteId
         );
         return [
           ...resultsWithoutNew,
-          { id, rating, score: existedResult.score },
+          { athleteId, rating, score: existedResult.score },
         ];
       }
-      return [...currentResults, { id, rating, score: "1" }];
+      return [...currentResults, { athleteId, rating, score: "1" }];
     });
   };
 
@@ -109,8 +111,8 @@ function CompetitionPage() {
               key={id}
               id={id}
               username={username}
-              rating={1}
-              score={"32"}
+              rating={0}
+              score={""}
               setScore={setScore}
               setRating={setRating}
             ></AthleteRow>
@@ -125,4 +127,4 @@ function CompetitionPage() {
   );
 }
 
-export default CompetitionPage;
+export default AddCompetitionPage;

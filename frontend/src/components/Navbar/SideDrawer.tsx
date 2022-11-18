@@ -11,15 +11,17 @@ import {
 import { Menu } from "@material-ui/icons";
 import { ClassNameMap } from "@material-ui/core/styles/withStyles";
 import useStyles from "./styles";
-import navLinks from "./navLinks";
 import { AppState } from "../../state/types";
 import { logoutAction } from "../../state/actions/user/logoutAction";
+import { athleteNavLinks, coachNavLinks } from "./navLinks";
 
 const SideDrawer: React.FC = () => {
   const classes: ClassNameMap = useStyles();
   const [stateMobileNav, setStateMobileNav] = useState(false);
 
   const { user } = useSelector((state: AppState) => state.userState);
+
+  const navLinks = user?.role === "Trener" ? coachNavLinks : athleteNavLinks;
 
   const toggleDrawer = (stateMobileNav: boolean) => () => {
     setStateMobileNav(stateMobileNav);

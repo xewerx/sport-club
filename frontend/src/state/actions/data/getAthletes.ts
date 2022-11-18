@@ -20,20 +20,11 @@ export const getAthletesAction = async (
       }
     );
     console.log(athletes);
-    dispatch(
-      getAthletes({
-        coaches: [],
-        clubs: [],
-        athletes,
-        error: null,
-      })
-    );
+    dispatch(getAthletes({ data: athletes }));
   } catch (error) {
     dispatch(
       getAthletes({
-        coaches: [],
-        clubs: [],
-        athletes: [],
+        data: [],
         error: "Błąd pobierania sportowców",
       })
     );
