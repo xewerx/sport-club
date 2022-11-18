@@ -19,4 +19,37 @@ export class ResultsService {
       athlete,
     });
   }
+
+  async update(id: number, score: string, rating: number) {
+    console.log(id, score, rating);
+    return this.resultRepository.update({ id }, { score, rating });
+  }
+
+  async findByAthleteId(athleteId: number) {
+    const results = await this.resultRepository.find({
+      relations: {
+        competition: true,
+      },
+      where: { athlete: { id: athleteId } },
+    });
+
+    return results;
+  }
+
+  async findByCompetition(competitionId: number) {
+    const results = await this.resultRepository.find({
+      relations: {
+        athlete: true,
+      },
+      where: { competition: { id: competitionId } },
+    });
+
+    return results.map((result) => ({
+      ...result,
+      athlete: {
+        id: result.athlete.id,
+        username: result.athlete.username,
+      },
+    }));
+  }
 }

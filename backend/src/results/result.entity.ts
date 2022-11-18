@@ -14,8 +14,8 @@ export class ResultEntity {
   rating: number;
 
   @ManyToOne(() => UserEntity, (user) => user.id)
-  athlete: number;
+  athlete: UserEntity;
 
   @ManyToOne(() => CompetitionEntity, (competition) => competition.id)
-  competition: number;
+  competition: CompetitionEntity;
 }

@@ -16,3 +16,7 @@ export interface SetCompetitionReq extends Express.Request {
     competition: Competition;
   };
 }
+
+export interface GetCompetitionsQuery extends Express.Request {
+  coach: number;
+}

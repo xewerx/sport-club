@@ -25,6 +25,10 @@ export class UsersService {
     )[0];
   }
 
+  async getUser(id: number): Promise<UserEntity> {
+    return this.userRepository.findOne({ where: { id } });
+  }
+
   async create(userData: UserInput): Promise<UserEntity> {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(userData.password, salt);

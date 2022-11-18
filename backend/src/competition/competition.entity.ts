@@ -16,5 +16,5 @@ export class CompetitionEntity {
   time: string;
 
   @ManyToOne(() => UserEntity, (user) => user.id)
-  creator: number;
+  creator: UserEntity;
 }
