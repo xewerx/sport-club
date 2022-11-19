@@ -34,6 +34,7 @@ const Header: React.FC = () => {
     <AppBar className={classes.bar} position="fixed">
       <Toolbar component="nav">
         <Container className={classes.navbarDisplayFlex}>
+          {/* @ts-ignore */}
           <Hidden smDown>
             <List
               component="nav"
@@ -81,6 +82,7 @@ const Header: React.FC = () => {
               )}
             </List>
           </Hidden>
+          {/* @ts-ignore */}
           <Hidden mdUp>
             <SideDrawer />
           </Hidden>

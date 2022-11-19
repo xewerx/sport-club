@@ -7,6 +7,7 @@ import MyProfilePage from "../pages/MyProfilePage";
 import { AppState } from "../state/types";
 import CompetitionPage from "../pages/Competitions";
 import EditCompetitionPage from "../pages/EditCompetitionPage";
+import Report from "../pages/Report";
 
 const HomeScreen: React.FC = () => {
   const user = useSelector((state: AppState) => state.userState.user);
@@ -17,6 +18,7 @@ const HomeScreen: React.FC = () => {
         <Route path="/competition" element={<CompetitionPage />} />
         <Route path="/add-competition" element={<AddCompetitionPage />} />
         <Route path="/edit-competitions" element={<EditCompetitionPage />} />
+        <Route path="/report" element={<Report />} />
         <Route
           path="/club"
           element={user?.role === "Trener" ? <></> : <ClubPage />}

@@ -54,7 +54,7 @@ function EditCompetitionPage() {
               <p>{time}</p>
             </div>
             {results.map(({ id, athlete, rating, score }) => (
-              <form className="competition-row">
+              <form className="competition-row" key={id}>
                 <p>{athlete.username}</p>
                 <input
                   id={`score-${id}`}

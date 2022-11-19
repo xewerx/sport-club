@@ -1,4 +1,5 @@
 export const coachNavLinks = [
+  { title: "Raport", path: "/report" },
   { title: "Edytuj Oceny", path: "/edit-competitions" },
   { title: "Dodaj Zawody", path: "/add-competition" },
   { title: "Profil", path: "/profile" },
