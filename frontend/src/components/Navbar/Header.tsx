@@ -28,7 +28,11 @@ const Header: React.FC = () => {
     logoutAction(dispatch);
   };
 
-  const navLinks = user?.role === "Trener" ? coachNavLinks : athleteNavLinks;
+  const navLinks = user
+    ? user?.role === "Trener"
+      ? coachNavLinks
+      : athleteNavLinks
+    : [];
 
   return (
     <AppBar className={classes.bar} position="fixed">

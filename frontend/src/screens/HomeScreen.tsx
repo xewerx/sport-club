@@ -5,9 +5,11 @@ import ClubPage from "../pages/ClubPage";
 import AddCompetitionPage from "../pages/AddCompetitionPage";
 import MyProfilePage from "../pages/MyProfilePage";
 import { AppState } from "../state/types";
-import CompetitionPage from "../pages/Competitions";
+import CompetitionPage from "../pages/CompetitionsPage";
 import EditCompetitionPage from "../pages/EditCompetitionPage";
-import Report from "../pages/Report";
+import ReportPage from "../pages/ReportPage";
+import SendMessagePage from "../pages/SendMessagePage";
+import MessagesPage from "../pages/MessagesPage";
 
 const HomeScreen: React.FC = () => {
   const user = useSelector((state: AppState) => state.userState.user);
@@ -18,7 +20,9 @@ const HomeScreen: React.FC = () => {
         <Route path="/competition" element={<CompetitionPage />} />
         <Route path="/add-competition" element={<AddCompetitionPage />} />
         <Route path="/edit-competitions" element={<EditCompetitionPage />} />
-        <Route path="/report" element={<Report />} />
+        <Route path="/send-message" element={<SendMessagePage />} />
+        <Route path="/read-message" element={<MessagesPage />} />
+        <Route path="/report" element={<ReportPage />} />
         <Route
           path="/club"
           element={user?.role === "Trener" ? <></> : <ClubPage />}

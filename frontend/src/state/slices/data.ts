@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ActionType } from "./types";
 
-export type Coach = {
+export interface Coach {
   id: number;
   username: string;
   role: "Trener";
-};
+}
 
 export type Athlete = Coach;
 
@@ -25,31 +25,39 @@ type ResultWithAthlete = Result & {
   id: number;
 };
 
-export type Competition = {
+export interface Competition {
   id: string;
   description: string;
   date: string;
   time: string;
   results: ResultWithAthlete[];
-};
+}
 
 type ResultWithCompetition = Result & {
   competition: Omit<Competition, "results">;
 };
 
-export type DataState = {
+interface Message {
+  id: number;
+  content: string;
+  createdAt: string;
+  isRead: boolean;
+  isReadByAll?: boolean;
+}
+export interface DataState {
   coaches: Coach[];
   clubs: Club[];
   athletes: Athlete[];
   competitions: Competition[];
   results: ResultWithCompetition[];
+  messages: Message[];
   error: string | null;
-};
+}
 
-type DataPayload<T> = {
+interface DataPayload<T> {
   data: T;
   error?: string | null;
-};
+}
 
 const initialState: DataState = {
   coaches: [],
@@ -57,6 +65,7 @@ const initialState: DataState = {
   athletes: [],
   competitions: [],
   results: [],
+  messages: [],
   error: null,
 };
 
@@ -85,6 +94,16 @@ const dataSlice = createSlice({
     ) => {
       state.results = action.payload.data;
     },
+    getMessages: (state, action: ActionType<DataPayload<Message[]>>) => {
+      state.messages = action.payload.data;
+    },
+    readMessage: (state, action: ActionType<DataPayload<Message["id"]>>) => {
+      state.messages = state.messages.map((message) => {
+        if (message.id === action.payload.data)
+          return { ...message, isRead: true };
+        return message;
+      });
+    },
   },
 });
 
@@ -94,6 +113,8 @@ export const {
   getAthletes,
   getCompetitions,
   getResults,
+  getMessages,
+  readMessage,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

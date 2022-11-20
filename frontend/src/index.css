@@ -104,7 +104,6 @@ input:hover {
 
 .element-hover:hover {
   cursor: pointer;
-  color: #fff;
 }
 
 .no-hover:hover {
@@ -501,4 +500,26 @@ a {
 .competition-row:last-child {
   border-bottom-right-radius: 1rem;
   border-bottom-left-radius: 1rem;
+}
+
+.message {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  padding: 0 3rem;
+  gap: 4rem;
+  background-color: #009933;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+}
+
+.message button {
+  height: 50%;
+  background-color: #fff;
+  border: none;
+}
+
+.message button:hover {
+  color: #009933;
 }

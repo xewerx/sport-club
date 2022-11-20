@@ -4,7 +4,7 @@ import { AppState } from "../state/types";
 import jsPDF from "jspdf";
 import { getCompetitionsAction } from "../state/actions/data/getCompetitions";
 
-const Report = () => {
+const ReportPage = () => {
   const competitions = useSelector(
     (state: AppState) => state.dataState.competitions
   );
@@ -74,4 +74,4 @@ const Report = () => {
   );
 };
 
-export default Report;
+export default ReportPage;

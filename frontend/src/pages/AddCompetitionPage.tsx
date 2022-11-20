@@ -62,8 +62,6 @@ function AddCompetitionPage() {
     });
   };
 
-  console.log(results);
-
   useEffect(() => {
     getAthletesAction(dispatch, username!, accessToken);
   }, [username, dispatch, accessToken]);
