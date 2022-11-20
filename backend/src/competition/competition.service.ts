@@ -58,7 +58,7 @@ export class CompetitionService {
     const competitionWithResults = await Promise.all(
       competitionWithResultsPromise,
     );
-    console.log(competitionWithResults);
+
     return competitionWithResults;
   }
 }

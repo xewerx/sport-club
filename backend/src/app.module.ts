@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ClubsModule } from './clubs/clubs.module';
 import { CompetitionModule } from './competition/competition.module';
 import { ResultsModule } from './results/results.module';
+import { MessagesModule } from './messages/messages.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ResultsModule } from './results/results.module';
     }),
     CompetitionModule,
     ResultsModule,
+    MessagesModule,
   ],
   controllers: [],
   providers: [],

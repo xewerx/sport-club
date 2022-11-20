@@ -1,5 +1,6 @@
 import { ClubEntity } from 'src/clubs/clubs.entity';
 import { CompetitionEntity } from 'src/competition/competition.entity';
+import { MessageEntity } from 'src/messages/message.entity';
 import {
   Entity,
   Column,
@@ -36,4 +37,12 @@ export class UserEntity {
   // only for coaches
   @OneToMany(() => CompetitionEntity, (competition) => competition.creator)
   competitions: CompetitionEntity[];
+
+  // only for atheletes
+  @OneToMany(() => MessageEntity, (message) => message.recipient)
+  messagesReceived: MessageEntity[];
+
+  // only for coaches
+  @OneToMany(() => MessageEntity, (message) => message.sender)
+  messagesSent: MessageEntity[];
 }

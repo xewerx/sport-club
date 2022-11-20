@@ -21,7 +21,6 @@ export class ResultsService {
   }
 
   async update(id: number, score: string, rating: number) {
-    console.log(id, score, rating);
     return this.resultRepository.update({ id }, { score, rating });
   }
 

@@ -51,7 +51,6 @@ export class UsersController {
   @Patch('club')
   async setClub(@Request() req: SetClubReq) {
     return exceptionHandler(async () => {
-      console.log(req.body);
       return this.userService.setClub(req.body.userId, req.body.clubId);
     });
   }
@@ -60,7 +59,6 @@ export class UsersController {
   @Post('avatar')
   async setAvatar(@Request() req: SetAvatarReq) {
     return exceptionHandler(async () => {
-      console.log(req.body);
       return this.userService.setAvatar(req.body.userId, req.body.avatar);
     });
   }

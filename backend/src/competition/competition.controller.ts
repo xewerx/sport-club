@@ -20,7 +20,6 @@ export class CompetitionController {
   @Post('/')
   async addCompetition(@Request() req: SetCompetitionReq) {
     return exceptionHandler(async () => {
-      console.log(req.body);
       return this.competitionService.create(req.body.competition, 1);
     });
   }

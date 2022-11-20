@@ -3,7 +3,7 @@ import { exceptionHandler } from 'src/utils/exceptionHandler';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { LocalAuthGuard } from './local-auth.guard';
-import { LoginReq, ProfileReq, RegisterReq } from './types';
+import { LoginReq, AuthorizedUser, RegisterReq } from './types';
 
 @Controller('auth')
 export class AuthController {
@@ -26,7 +26,7 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
-  async getProfile(@Request() req: ProfileReq) {
+  async getProfile(@Request() req: AuthorizedUser) {
     return exceptionHandler(() => {
       return req.user;
     });

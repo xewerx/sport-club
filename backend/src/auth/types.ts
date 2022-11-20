@@ -24,4 +24,4 @@ export interface LoginReq extends Express.Request {
   user: User;
 }
 
-export type ProfileReq = LoginReq;
+export type AuthorizedUser = LoginReq;

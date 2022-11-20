@@ -27,7 +27,6 @@ export class ResultsController {
   @Patch('/')
   async updateResult(@Request() req: UpdateResultReq) {
     return exceptionHandler(async () => {
-      console.log(req);
       return this.resultsService.update(
         req.body.id,
         req.body.score,
