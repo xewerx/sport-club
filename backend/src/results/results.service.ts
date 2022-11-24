@@ -12,6 +12,7 @@ export class ResultsService {
   ) {}
 
   async create({ score, rating, competition, athlete }: Result) {
+    if (rating < 1 || rating > 10) throw new Error('Wrong rating!');
     this.resultRepository.save({
       score,
       rating,
@@ -21,6 +22,7 @@ export class ResultsService {
   }
 
   async update(id: number, score: string, rating: number) {
+    if (rating < 1 || rating > 10) throw new Error('Wrong rating!');
     return this.resultRepository.update({ id }, { score, rating });
   }
 

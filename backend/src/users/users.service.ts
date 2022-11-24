@@ -30,6 +30,14 @@ export class UsersService {
   }
 
   async create(userData: UserInput): Promise<UserEntity> {
+    const strongPassword = new RegExp(
+      '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})',
+    );
+
+    if (!strongPassword.test(userData.password)) {
+      throw new Error('Password is too weak');
+    }
+
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(userData.password, salt);
 
