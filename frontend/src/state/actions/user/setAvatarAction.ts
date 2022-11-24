@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "react";
 import { checkForEnv } from "../../../utils/checkForEnv";
+import { setAvatar } from "../../slices/user";
 
 export const setAvatarAction = async (
   dispatch: Dispatch<any>,
@@ -21,6 +22,7 @@ export const setAvatarAction = async (
         },
       }
     );
+    dispatch(setAvatar(avatar));
   } catch (error) {
     console.log("error");
   }

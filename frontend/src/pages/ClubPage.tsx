@@ -31,10 +31,10 @@ function ClubPage() {
   }, [clubName]);
 
   return (
-    <>
-      <div>Mój trener: {coach}</div>
-      <div>Mój obecny klub: {club || "Brak"}</div>
-      <div>Zmień klub:</div>
+    <div className="screen-container">
+      <h3>Mój trener: {coach}</h3>
+      <h3>Mój obecny klub: {club || "Brak"}</h3>
+      <h3>Zmień klub:</h3>
       <div>
         <select
           className="element-hover"
@@ -48,7 +48,7 @@ function ClubPage() {
           ))}
         </select>
       </div>
-    </>
+    </div>
   );
 }
 

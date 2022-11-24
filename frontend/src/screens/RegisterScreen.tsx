@@ -48,11 +48,9 @@ const RegisterScreen: React.FC = () => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setValidationPasswordError("Hasla nie sa takie same");
-    }
-    // else if (!strongPassword.test(password)) {
-    //   setValidationPasswordError("Haslo jest zbyt slabe");
-    // }
-    else {
+    } else if (!strongPassword.test(password)) {
+      setValidationPasswordError("Haslo jest zbyt slabe");
+    } else {
       setValidationPasswordError("");
       registerAction(email, password, role, coach, dispatch);
     }

@@ -1,21 +1,23 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { getResultsAction } from "../state/actions/data/getResults";
 import { AppState } from "../state/types";
 
-function CompetitionPage() {
+function AthletePage() {
   const results = useSelector((state: AppState) => state.dataState.results);
-  const { accessToken, id } = useSelector(
+  const { accessToken } = useSelector(
     (state: AppState) => state.userState.user!
   );
-
+  const { athleteId } = useParams();
+  console.log(athleteId);
   const dispatch = useDispatch();
 
   console.log(results);
 
   useEffect(() => {
-    getResultsAction(id!, accessToken, dispatch);
-  }, [dispatch, accessToken, id]);
+    getResultsAction(athleteId as unknown as number, accessToken, dispatch);
+  }, [dispatch, accessToken, athleteId]);
 
   return (
     <div className="screen-container">
@@ -35,4 +37,4 @@ function CompetitionPage() {
   );
 }
 
-export default CompetitionPage;
+export default AthletePage;

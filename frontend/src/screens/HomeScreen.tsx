@@ -10,6 +10,7 @@ import EditCompetitionPage from "../pages/EditCompetitionPage";
 import ReportPage from "../pages/ReportPage";
 import SendMessagePage from "../pages/SendMessagePage";
 import MessagesPage from "../pages/MessagesPage";
+import AthletePage from "../pages/AthletePage";
 
 const HomeScreen: React.FC = () => {
   const user = useSelector((state: AppState) => state.userState.user);
@@ -20,6 +21,7 @@ const HomeScreen: React.FC = () => {
         <Route path="/competition" element={<CompetitionPage />} />
         <Route path="/add-competition" element={<AddCompetitionPage />} />
         <Route path="/edit-competitions" element={<EditCompetitionPage />} />
+        <Route path="/edit-competitions/:athleteId" element={<AthletePage />} />
         <Route path="/send-message" element={<SendMessagePage />} />
         <Route path="/read-message" element={<MessagesPage />} />
         <Route path="/report" element={<ReportPage />} />

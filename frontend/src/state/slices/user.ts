@@ -39,9 +39,8 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
-    setAvatar: (state, action: ActionType<UserState>) => {
-      state.user = action.payload.user;
-      state.error = action.payload.error;
+    setAvatar: (state, action: ActionType<string>) => {
+      state.user!.avatar = action.payload;
     },
   },
 });

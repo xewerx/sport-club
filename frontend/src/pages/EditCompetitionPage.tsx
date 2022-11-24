@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { getCompetitionsAction } from "../state/actions/data/getCompetitions";
 import { updateResultAction } from "../state/actions/data/updateResult";
 import { AppState } from "../state/types";
@@ -46,8 +47,8 @@ function EditCompetitionPage() {
       </div>
       <h3>Edytuj oceny</h3>
       {competitions &&
-        competitions.map(({ description, date, time, results }) => (
-          <div className="competition-container">
+        competitions.map(({ description, date, time, results, id }) => (
+          <div className="competition-container" key={id}>
             <div className="competition-header">
               <p>{description}</p>
               <p>{date}</p>
@@ -55,7 +56,7 @@ function EditCompetitionPage() {
             </div>
             {results.map(({ id, athlete, rating, score }) => (
               <form className="competition-row" key={id}>
-                <p>{athlete.username}</p>
+                <Link to={`${athlete.id}`}>{athlete.username}</Link>
                 <input
                   id={`score-${id}`}
                   type="text"
